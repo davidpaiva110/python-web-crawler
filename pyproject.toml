@@ -1,0 +1,45 @@
+[project]
+name = "webcrawler"
+version = "0.1.0"
+description = "A simple, concurrent, single-domain web crawler CLI."
+requires-python = ">=3.10,<4.0"
+authors = [{ name = "David Paiva" }]
+dependencies = [
+    "httpx>=0.27,<0.28",
+    "beautifulsoup4>=4.12,<5.0",
+    "lxml>=5.0,<6.0",
+]
+
+[project.scripts]
+webcrawler = "webcrawler.cli.main:main"
+
+[tool.poetry]
+packages = [{ include = "webcrawler", from = "src" }]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+pytest-asyncio = "^0.24"
+respx = "^0.21"
+ruff = "^0.6"
+mypy = "^1.11"
+
+[build-system]
+requires = ["poetry-core>=1.9.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+ignore_missing_imports = true
+mypy_path = "src"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
